@@ -1,8 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const createOrder = require('../controllers/order-controller')
+const {
+    createOrder,
+    changeStatus
+} = require('../controllers/order-controller')
 
-router.route('/').post(createOrder)
+const AuthAdminMiddleware = require('../middleware/auth-admin-middleware')
+const AuthUserMiddleware =require('../middleware/auth-user-middleware')
+
+router.route('/').post(AuthUserMiddleware ,createOrder)
+router.route('/admin/status/:id').patch(AuthAdminMiddleware, changeStatus)
 
 
 module.exports = router

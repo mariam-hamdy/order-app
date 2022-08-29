@@ -18,8 +18,10 @@ app.options("*", cors());
 //routes
 const authRoute = require('./routes/auth-route')
 const orderRoute = require('./routes/order-route')
+const userOrderRoute = require('./routes/user-order-route')
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/orders', orderRoute)
+app.use('/api/v1/userorders', userOrderRoute)
 
 
 

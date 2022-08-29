@@ -14,7 +14,7 @@ const AuthAdminMiddleware = async(req, res, next) => {
         const payload = jwt.verify(token, process.env.JWT_SECRET)
         const {userId, userName, isAdmin} = payload
         if(isAdmin) {
-            req.user = {userId: userId , userName: userName}
+            req.user = {userId: userId , userName: userName, isAdmin: isAdmin}
         } else {
             throw new UnauthenticatedError('only admin can access this resource')
         }
