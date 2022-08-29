@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now()
@@ -56,7 +60,8 @@ UserSchema.methods.comparePassword = async function(candidatePassword) {
 }
 
 UserSchema.methods.generateToken = function() {
-    const generatedToken = jwt.sign({userId: this._id, userName: `${this.firstName} ${this.middleName}`},
+    const generatedToken = jwt.sign({
+        userId: this._id, userName: `${this.firstName} ${this.middleName}`, isAdmin: this.isAdmin},
     process.env.JWT_SECRET, {expiresIn: process.env.TOKEN_LIFETIME})
     this.token = generatedToken
     return generatedToken
