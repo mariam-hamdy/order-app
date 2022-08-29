@@ -1,7 +1,6 @@
-require('dotenv').config()
 const csv = require('csvtojson')
-const connectDB = require('./database/connect')
 const Product = require('./models/product')
+//require('dotenv').config()
 
 const grabProductData = async() => {
     const jsonArray = await csv().fromFile('./prodcuts.csv')
@@ -13,9 +12,9 @@ const grabProductData = async() => {
     return productsJson
 }
 
-const start = async() => {
+const seedProducts = async() => {
     try {
-        await connectDB(process.env.MONGO_URL)
+        //await connectDB(process.env.MONGO_URL)
         const initialProducts = await grabProductData()
         await Product.create(initialProducts)
         process.exit(0)
@@ -26,7 +25,7 @@ const start = async() => {
      
     
 }
-start()
+seedProducts()
 
 
 
