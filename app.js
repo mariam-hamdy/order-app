@@ -15,6 +15,10 @@ app.use(cors())
 app.options("*", cors());
 
 //routes
+const authRoute = require('./routes/auth-route')
+app.use('/api/v1/auth', authRoute)
+
+
 
 //middlewares
 const ErrorHandlerMiddleware = require('./middleware/error-handler')
